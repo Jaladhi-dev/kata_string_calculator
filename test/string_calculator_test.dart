@@ -25,6 +25,15 @@ void main(){
       expect(calculator.add('1\n2'), 3);
       expect(calculator.add('1\n2,7'), 10);
       expect(calculator.add('1\n2\n3\n4\n5'), 15);
+      expect(calculator.add('//;\n1;2'), 3);
+      expect(calculator.add('//*\n1*2*5'), 8);
+      expect(calculator.add('//+\n10+30+50'), 90);
+    });
+    
+    test('Should handled custom delimiter', (){
+      expect(calculator.add('//;\n1;2'), 3);
+      expect(calculator.add('//&\n1&2&9'), 12);
+      expect(calculator.add('//*\n10*20*40'), 70);
     });
   });
 }
