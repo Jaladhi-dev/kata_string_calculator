@@ -28,6 +28,11 @@ class StringCalculator {
     final splitNumbers = numbers.split(delimiterRegexp);
     //convert to integer
     final numbersList = splitNumbers.map((element) => int.parse(element.trim()));
+    //check negatives numbers
+    final negatives = numbersList.where((n) => n < 0).toList();
+    if (negatives.isNotEmpty) {
+      throw FormatException('Negative numbers not allowed: ${negatives.join(',')}');
+    }
     //sum of numbers
     final sum = numbersList.fold(0, (previousValue, element) => previousValue + element);
     return sum;

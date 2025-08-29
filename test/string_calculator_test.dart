@@ -35,5 +35,25 @@ void main(){
       expect(calculator.add('//&\n1&2&9'), 12);
       expect(calculator.add('//*\n10*20*40'), 70);
     });
+
+    test('Should throw FormatException for a single negative number', () {
+      try {
+        calculator.add('1,-2,3');
+        fail('Expected FormatException');
+      } catch (e) {
+        expect(e, isA<FormatException>());
+        expect(e.toString(), contains('Negative numbers not allowed: -2'));
+      }
+    });
+
+    test('Should throw FormatException for multiple negative numbers', () {
+      try {
+        calculator.add('-1,2,-3,4');
+        fail('Expected FormatException');
+      } catch (e) {
+        expect(e, isA<FormatException>());
+        expect(e.toString(), contains('Negative numbers not allowed: -1,-3'));
+      }
+    });
   });
 }
